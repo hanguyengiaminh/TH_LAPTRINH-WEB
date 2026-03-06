@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebisiteBanHang.Models.Product>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sách sản phẩm</h1>
+
+<p>
+    @* Sửa "Create" thành "Add" để khớp với Action trong ProductController *@
+    <a asp-action="Add" class="btn btn-primary">Thêm sản phẩm mới</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Danh mục (ID)
+            </th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @item.Price.ToString("#,##0") VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @* Hiển thị hình ảnh thực tế thay vì chỉ hiện đường dẫn chữ *@
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@item.ImageUrl" alt="@item.Name" style="width: 80px; height: auto; border-radius: 5px;" />
+                }
+                else
+                {
+                    <span>Không có ảnh</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @* Cập nhật các liên kết để khớp với Action trong ProductController *@
+                @Html.ActionLink("Sửa", "Update", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" }) |
+                @Html.ActionLink("Chi tiết", "Display", new { id = item.Id }, new { @class = "btn btn-sm btn-info" }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

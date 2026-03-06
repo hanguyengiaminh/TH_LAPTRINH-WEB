@@ -1,0 +1,66 @@
+﻿@model WebisiteBanHang.Models.Product
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm mới";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thêm sản phẩm</h1>
+<h4>Thông tin sản phẩm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        @* Quan trọng: enctype="multipart/form-data" để truyền file ảnh lên Controller *@
+        <form asp-action="Add" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label">Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label">Giá bán</label>
+                <input asp-for="Price" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label">Mô tả chi tiết</label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" class="control-label">Danh mục sản phẩm</label>
+                @* Dùng SelectList truyền từ Controller qua ViewBag *@
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Hình ảnh sản phẩm</label>
+                @* name="Image" phải khớp với tham số IFormFile trong hàm Add của Controller *@
+                <input type="file" name="Image" class="form-control" accept="image/*" />
+                <small class="form-text text-muted">Chọn file định dạng ảnh (.jpg, .png...)</small>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Tạo mới
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        @* Hỗ trợ kiểm tra dữ liệu ngay tại trình duyệt *@
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
