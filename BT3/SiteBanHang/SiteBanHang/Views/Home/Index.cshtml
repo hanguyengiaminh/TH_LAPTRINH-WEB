@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Trang chu";
+}
+
+<section class="hero-banner rounded-4 p-5 mb-5 text-white">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <span class="badge text-bg-light text-dark mb-3">Bai 3 - ASP.NET Core MVC</span>
+            <h1 class="display-5 fw-bold">Website ban hang voi Entity Framework Core</h1>
+            <p class="lead mb-4">
+                Ung dung da hoan thien cac chuc nang hien thi, them, sua, xoa san pham va danh muc
+                theo dung yeu cau cua bai thuc hanh.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a asp-controller="Product" asp-action="Index" class="btn btn-light btn-lg">Quan ly san pham</a>
+                <a asp-controller="Category" asp-action="Index" class="btn btn-outline-light btn-lg">Quan ly danh muc</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="feature-card bg-white text-dark rounded-4 p-4 shadow-lg">
+                <h2 class="h4">Noi dung da co</h2>
+                <ul class="mb-0 ps-3">
+                    <li>Entity Framework Core ket noi SQL Server</li>
+                    <li>Repository cho Product va Category</li>
+                    <li>CRUD day du cho san pham</li>
+                    <li>CRUD bo sung cho danh muc</li>
+                    <li>Giao dien dieu huong website ban hang</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h4">San pham</h2>
+                <p class="text-muted">Xem danh sach, them moi, cap nhat va xoa san pham.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Mo danh sach san pham</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h4">Danh muc</h2>
+                <p class="text-muted">Quan ly cac nhom san pham theo yeu cau bo sung cua bai.</p>
+                <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary">Mo danh sach danh muc</a>
+            </div>
+        </div>
+    </div>
+</section>

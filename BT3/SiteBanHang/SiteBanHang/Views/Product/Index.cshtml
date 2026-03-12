@@ -1,0 +1,43 @@
+@model IEnumerable<SiteBanHang.Models.Product>
+
+@{
+    ViewData["Title"] = "San pham";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2 mb-1">Quan ly san pham</h1>
+        <p class="text-muted mb-0">Danh sach san pham trong website ban hang.</p>
+    </div>
+    <a asp-action="Add" class="btn btn-primary">Them san pham</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Ten san pham</th>
+                <th>Gia</th>
+                <th>Danh muc</th>
+                <th>Mo ta</th>
+                <th class="text-end">Tac vu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("N0") VNĐ</td>
+                    <td>@(product.Category?.Name ?? "Chua co")</td>
+                    <td>@product.Description</td>
+                    <td class="text-end">
+                        <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">Xem</a>
+                        <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">Sua</a>
+                        <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">Xoa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+@model SiteBanHang.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiet san pham";
+}
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <img src="@(string.IsNullOrWhiteSpace(Model.ImageUrl) ? "https://placehold.co/600x420?text=San+pham" : Model.ImageUrl)" class="card-img-top product-detail-image" alt="@Model.Name" />
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100 p-4">
+            <h1 class="h2">@Model.Name</h1>
+            <p class="fs-4 fw-semibold text-primary">@Model.Price.ToString("N0") VNĐ</p>
+            <p><strong>Danh muc:</strong> @(Model.Category?.Name ?? "Chua co")</p>
+            <p class="mb-4">@Model.Description</p>
+
+            <div class="d-flex gap-2">
+                <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary">Sua</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Xoa</a>
+                <a asp-action="Index" class="btn btn-outline-secondary">Danh sach</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+@model SiteBanHang.Models.Product
+
+@{
+    ViewData["Title"] = "Xoa san pham";
+}
+
+<div class="card shadow-sm p-4">
+    <h1 class="h2 text-danger">Xac nhan xoa san pham</h1>
+    <p class="mb-4">Ban co chac chan muon xoa san pham <strong>@Model.Name</strong> khong?</p>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Xoa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Huy</a>
+    </form>
+</div>

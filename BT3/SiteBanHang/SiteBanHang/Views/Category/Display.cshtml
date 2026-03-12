@@ -1,0 +1,28 @@
+@model SiteBanHang.Models.Category
+
+@{
+    ViewData["Title"] = "Chi tiet danh muc";
+}
+
+<div class="card shadow-sm p-4">
+    <h1 class="h2">@Model.Name</h1>
+    <p class="text-muted">So san pham: @(Model.Products?.Count ?? 0)</p>
+
+    @if (Model.Products is { Count: > 0 })
+    {
+        <ul class="list-group mb-4">
+            @foreach (var product in Model.Products)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@product.Name</span>
+                    <span class="badge text-bg-primary">@product.Price.ToString("N0") VNĐ</span>
+                </li>
+            }
+        </ul>
+    }
+
+    <div class="d-flex gap-2">
+        <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary">Sua</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Danh sach</a>
+    </div>
+</div>
