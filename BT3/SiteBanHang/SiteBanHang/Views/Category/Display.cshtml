@@ -1,12 +1,12 @@
 @model SiteBanHang.Models.Category
 
 @{
-    ViewData["Title"] = "Chi tiet danh muc";
+    ViewData["Title"] = "Chi tiết danh mục";
 }
 
 <div class="card shadow-sm p-4">
     <h1 class="h2">@Model.Name</h1>
-    <p class="text-muted">So san pham: @(Model.Products?.Count ?? 0)</p>
+    <p class="text-muted">Số sản phẩm: @(Model.Products?.Count ?? 0)</p>
 
     @if (Model.Products is { Count: > 0 })
     {
@@ -22,7 +22,7 @@
     }
 
     <div class="d-flex gap-2">
-        <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary">Sua</a>
-        <a asp-action="Index" class="btn btn-outline-secondary">Danh sach</a>
+        <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Danh sách</a>
     </div>
 </div>

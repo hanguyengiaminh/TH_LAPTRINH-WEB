@@ -1,16 +1,16 @@
 @model SiteBanHang.Models.Product
 
 @{
-    ViewData["Title"] = "Xoa san pham";
+    ViewData["Title"] = "Xóa sản phẩm";
 }
 
 <div class="card shadow-sm p-4">
-    <h1 class="h2 text-danger">Xac nhan xoa san pham</h1>
-    <p class="mb-4">Ban co chac chan muon xoa san pham <strong>@Model.Name</strong> khong?</p>
+    <h1 class="h2 text-danger">Xác nhận xóa sản phẩm</h1>
+    <p class="mb-4">Bạn có chắc chắn muốn xóa sản phẩm <strong>@Model.Name</strong> không?</p>
 
     <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Xoa</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Huy</a>
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
     </form>
 </div>

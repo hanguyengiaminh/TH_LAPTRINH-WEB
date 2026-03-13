@@ -9,11 +9,16 @@ namespace SiteBanHang.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public ProductController(
+            IProductRepository productRepository,
+            ICategoryRepository categoryRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -41,12 +46,19 @@ namespace SiteBanHang.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(Product product)
+        public async Task<IActionResult> Add(Product product, IFormFile? imageFile)
         {
+            ModelState.Remove(nameof(Product.ImageUrl));
+
             if (!ModelState.IsValid)
             {
                 await LoadCategoriesAsync(product.CategoryId);
                 return View(product);
+            }
+
+            if (imageFile is not null)
+            {
+                product.ImageUrl = await SaveImageAsync(imageFile);
             }
 
             await _productRepository.AddAsync(product);
@@ -67,20 +79,39 @@ namespace SiteBanHang.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, Product product)
+        public async Task<IActionResult> Update(int id, Product product, IFormFile? imageFile)
         {
+            ModelState.Remove(nameof(Product.ImageUrl));
+
             if (id != product.Id)
+            {
+                return NotFound();
+            }
+
+            var existingProduct = await _productRepository.GetByIdAsync(id);
+            if (existingProduct is null)
             {
                 return NotFound();
             }
 
             if (!ModelState.IsValid)
             {
+                product.ImageUrl = existingProduct.ImageUrl;
                 await LoadCategoriesAsync(product.CategoryId);
                 return View(product);
             }
 
-            await _productRepository.UpdateAsync(product);
+            existingProduct.Name = product.Name;
+            existingProduct.Price = product.Price;
+            existingProduct.Description = product.Description;
+            existingProduct.CategoryId = product.CategoryId;
+
+            if (imageFile is not null)
+            {
+                existingProduct.ImageUrl = await SaveImageAsync(imageFile);
+            }
+
+            await _productRepository.UpdateAsync(existingProduct);
             return RedirectToAction(nameof(Index));
         }
 
@@ -107,6 +138,21 @@ namespace SiteBanHang.Controllers
         {
             var categories = await _categoryRepository.GetAllAsync();
             ViewBag.Categories = new SelectList(categories, "Id", "Name", selectedId);
+        }
+
+        private async Task<string> SaveImageAsync(IFormFile imageFile)
+        {
+            var imagesFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            Directory.CreateDirectory(imagesFolder);
+
+            var extension = Path.GetExtension(imageFile.FileName);
+            var fileName = $"{Guid.NewGuid():N}{extension}";
+            var savePath = Path.Combine(imagesFolder, fileName);
+
+            await using var fileStream = new FileStream(savePath, FileMode.Create);
+            await imageFile.CopyToAsync(fileStream);
+
+            return $"/images/{fileName}";
         }
     }
 }

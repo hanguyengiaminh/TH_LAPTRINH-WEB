@@ -1,17 +1,17 @@
 @model SiteBanHang.Models.Category
 
 @{
-    ViewData["Title"] = "Xoa danh muc";
+    ViewData["Title"] = "Xóa danh mục";
 }
 
 <div class="card shadow-sm p-4">
-    <h1 class="h2 text-danger">Xac nhan xoa danh muc</h1>
-    <p class="mb-2">Ban co chac chan muon xoa danh muc <strong>@Model.Name</strong> khong?</p>
-    <p class="text-muted">Luu y: danh muc con san pham se khong xoa duoc do rang buoc du lieu.</p>
+    <h1 class="h2 text-danger">Xác nhận xóa danh mục</h1>
+    <p class="mb-2">Bạn có chắc chắn muốn xóa danh mục <strong>@Model.Name</strong> không?</p>
+    <p class="text-muted">Lưu ý: danh mục còn sản phẩm sẽ không xóa được do ràng buộc dữ liệu.</p>
 
     <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Xoa</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Huy</a>
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
     </form>
 </div>

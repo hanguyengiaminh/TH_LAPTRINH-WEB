@@ -1,53 +1,57 @@
 @{
-    ViewData["Title"] = "Trang chu";
+    ViewData["Title"] = "Trang chủ";
 }
 
-<section class="hero-banner rounded-4 p-5 mb-5 text-white">
-    <div class="row align-items-center g-4">
+<section class="hero-panel mb-5">
+    <div class="row g-4 align-items-center">
         <div class="col-lg-7">
-            <span class="badge text-bg-light text-dark mb-3">Bai 3 - ASP.NET Core MVC</span>
-            <h1 class="display-5 fw-bold">Website ban hang voi Entity Framework Core</h1>
-            <p class="lead mb-4">
-                Ung dung da hoan thien cac chuc nang hien thi, them, sua, xoa san pham va danh muc
-                theo dung yeu cau cua bai thuc hanh.
+            <p class="eyebrow">Website bán hàng với ASP.NET Core MVC</p>
+            <h1 class="hero-title">Đây là Website Bán Hàng của Hà Nguyễn Gia Minh</h1>
+            <p class="hero-copy">
+                Website Bán sách nhiều thể loại sách khác nhau với giá ưu đãi và có nhiều các loại sách hấp dẫn khác nhau.
             </p>
-            <div class="d-flex flex-wrap gap-2">
-                <a asp-controller="Product" asp-action="Index" class="btn btn-light btn-lg">Quan ly san pham</a>
-                <a asp-controller="Category" asp-action="Index" class="btn btn-outline-light btn-lg">Quan ly danh muc</a>
+            <div class="d-flex flex-wrap gap-3">
+                <a asp-controller="Product" asp-action="Index" class="btn btn-hero-primary">Xem sản phẩm</a>
+                <a asp-controller="Category" asp-action="Index" class="btn btn-hero-secondary">Xem danh mục</a>
             </div>
         </div>
         <div class="col-lg-5">
-            <div class="feature-card bg-white text-dark rounded-4 p-4 shadow-lg">
-                <h2 class="h4">Noi dung da co</h2>
-                <ul class="mb-0 ps-3">
-                    <li>Entity Framework Core ket noi SQL Server</li>
-                    <li>Repository cho Product va Category</li>
-                    <li>CRUD day du cho san pham</li>
-                    <li>CRUD bo sung cho danh muc</li>
-                    <li>Giao dien dieu huong website ban hang</li>
+            <aside class="note-card">
+                <h2 class="note-title">Điểm nhấn giao diện</h2>
+                <ul class="note-list">
+                    <li>Bố cục trung tâm, khoảng trắng thoáng và nhịp đọc rõ ràng</li>
+                    <li>Tiêu đề serif lớn kết hợp chữ nội dung sans-serif dễ theo dõi</li>
+                    <li>Nút kêu gọi hành động nổi bật nhưng không quá chói</li>
+                    <li>Các khối thông tin được chia box, viền và bóng nhẹ để dễ quan sát</li>
                 </ul>
-            </div>
+            </aside>
         </div>
     </div>
 </section>
 
 <section class="row g-4">
-    <div class="col-md-6">
-        <div class="card shadow-sm h-100">
-            <div class="card-body">
-                <h2 class="h4">San pham</h2>
-                <p class="text-muted">Xem danh sach, them moi, cap nhat va xoa san pham.</p>
-                <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Mo danh sach san pham</a>
-            </div>
-        </div>
+    <div class="col-md-4">
+        <article class="feature-box h-100">
+            <p class="eyebrow">Sản phẩm</p>
+            <h2>Quản lý kho hàng</h2>
+            <p>Theo dõi danh sách sản phẩm, hình ảnh, mô tả, giá bán và thao tác chỉnh sửa ngay trên hệ thống.</p>
+            <a asp-controller="Product" asp-action="Index" class="feature-link">Đi đến sản phẩm</a>
+        </article>
     </div>
-    <div class="col-md-6">
-        <div class="card shadow-sm h-100">
-            <div class="card-body">
-                <h2 class="h4">Danh muc</h2>
-                <p class="text-muted">Quan ly cac nhom san pham theo yeu cau bo sung cua bai.</p>
-                <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary">Mo danh sach danh muc</a>
-            </div>
-        </div>
+    <div class="col-md-4">
+        <article class="feature-box h-100">
+            <p class="eyebrow">Danh mục</p>
+            <h2>Sắp xếp nội dung</h2>
+            <p>Phân nhóm sản phẩm để người dùng quan sát dễ hơn và quản trị dữ liệu gọn gàng hơn.</p>
+            <a asp-controller="Category" asp-action="Index" class="feature-link">Đi đến danh mục</a>
+        </article>
+    </div>
+    <div class="col-md-4">
+        <article class="feature-box h-100 accent-box">
+            <p class="eyebrow">Giới thiệu</p>
+            <h2>Không gian trực quan</h2>
+            <p>Giao diện được nhấn mạnh bằng màu mực, nền giấy và các khối nội dung có cấu trúc chặt chẽ.</p>
+            <a asp-controller="Home" asp-action="Privacy" class="feature-link">Xem thêm</a>
+        </article>
     </div>
 </section>

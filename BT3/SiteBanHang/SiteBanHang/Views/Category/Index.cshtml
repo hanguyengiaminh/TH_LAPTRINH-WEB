@@ -1,39 +1,46 @@
 @model IEnumerable<SiteBanHang.Models.Category>
 
 @{
-    ViewData["Title"] = "Danh muc";
+    ViewData["Title"] = "Danh mục";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1 class="h2 mb-1">Quan ly danh muc</h1>
-        <p class="text-muted mb-0">CRUD danh muc theo yeu cau bo sung cua bai tap.</p>
+<section class="content-panel mb-4">
+    <div class="section-header">
+        <div>
+            <p class="eyebrow">Phân loại dữ liệu</p>
+            <h1>Quản lý danh mục</h1>
+            <p class="section-copy">Danh mục giúp tổ chức sản phẩm mạch lạc hơn và tăng khả năng điều hướng cho người dùng.</p>
+        </div>
+        <a asp-action="Add" class="btn btn-hero-primary">Thêm danh mục</a>
     </div>
-    <a asp-action="Add" class="btn btn-primary">Them danh muc</a>
-</div>
+</section>
 
-<div class="table-responsive">
-    <table class="table table-hover align-middle">
-        <thead class="table-light">
-            <tr>
-                <th>Ten danh muc</th>
-                <th>So san pham</th>
-                <th class="text-end">Tac vu</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var category in Model)
-            {
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table product-table align-middle mb-0">
+            <thead>
                 <tr>
-                    <td>@category.Name</td>
-                    <td>@(category.Products?.Count ?? 0)</td>
-                    <td class="text-end">
-                        <a asp-action="Display" asp-route-id="@category.Id" class="btn btn-sm btn-outline-secondary">Xem</a>
-                        <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary">Sua</a>
-                        <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger">Xoa</a>
-                    </td>
+                    <th>Tên danh mục</th>
+                    <th>Số sản phẩm</th>
+                    <th class="text-end">Tác vụ</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@category.Name</td>
+                        <td>@(category.Products?.Count ?? 0)</td>
+                        <td class="text-end">
+                            <div class="action-group">
+                                <a asp-action="Display" asp-route-id="@category.Id" class="btn btn-sm btn-outline-secondary">Xem</a>
+                                <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary">Sửa</a>
+                                <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
